@@ -1,0 +1,109 @@
+<!--    Name:       	Ryan Bolesta
+		Major:			CS/SD
+        Creation Date:  December 4, 2017
+		Due Date:		December 8, 2017
+        Course:     	CSC242
+        Professor Name: Dr. Tan
+        Assignment: 	Shopping Cart (#4)
+        Filename:   	customer.html
+        Purpose:    Customer information page for the site. Users will 
+					enter several fields such as their name and address.
+					Each input will be validated with regex using the pattern
+					attribute.  -->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ShredShop</title>
+    <link rel="stylesheet" href="css/shoppingCart.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div id="storeTop">
+            <div id="header">
+                <div id="storeHead">
+                    <h1>Shred Shop</h1>
+                </div>
+                <div id="information">
+                    <!-- Contains information for the class -->
+                    <pre> 
+            Ryan Bolesta
+            CSC242
+            Dr. Tan
+            September 2017
+        </pre>
+                </div>
+            </div>
+
+            <div id="navigation">
+                <h2>Enter Customer Information</h2>
+                <form method='POST' action='confirm.php' > <!-- Customer information form -->
+                    <label for='FName'>First Name</label>
+                    <input type='text' name='FName' maxlength='30' pattern='[A-Za-z]+' title='Only letters are allowed' required>
+                    <br>
+                    <label for='LName'>Last Name</label>
+                    <input type='text' name='LName' maxlength='30' pattern='[A-Za-z]+' title='Only letters are allowed' required>
+                    <br>
+					<!-- Telephone number pattern requires 10 digits without dashes -->
+                    <label for='Phone'>Telephone Number</label>
+                    <input type='text' name='Phone' maxlength='10' pattern='[0-9]{10}' title='Area code required, do not use dashes (-)' required>
+                    <br>
+                    <label for='Addr1'>Address 1</label>
+                    <input type='text' name='Addr1' maxlength='50' required>
+                    <br>
+                    <label for='Addr2'>Address 2</label>
+                    <input type='text' name='Addr2' maxlength='50'>
+                    <br>
+                    <label for='City'>City</label>
+                    <input type='text' name='City' maxlength='25' pattern='[A-Za-z ]+' title='Only letters are allowed' required>
+                    <br>
+                    <label for='State'>State (ex: PA)</label>
+                    <input type='text' name='State' maxlength='2' pattern='[A-Za-z]{2}' title='Only 2 letters are allowed' required>
+                    <br>
+                    <label for='Zip'>Zip Code</label>
+                    <input type='text' name='Zip' maxlength='5' pattern='[0-9]{5}' title='Must be a 5 number zip code' required>
+                    <br>
+                    <label for='EMail'>E-Mail Address</label>
+                    <input type='text' name='EMail' pattern='[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z]{2,3}' title='Must match the pattern x@abc.xyz' required>
+                    <br>
+                    <input type='submit'>
+                </form>
+
+            </div>
+        </div>
+
+        <footer>NOTE: This is a school project and not a real shopping website, all images are from the-house.com</footer>
+
+    </div>
+
+    <script>
+        //Go to page specified in the select dropdown
+        $(document).ready(function() {
+            $('select').change(function() {
+                if ($('select').val() !== '---') {
+                    window.location = "catalog.php?category=" + $('select').val();
+                }
+
+            });
+
+
+        });
+
+        function validate() {
+            if (document.Form1.FName.value == "") {
+                alert("Name is required")
+                return false
+            } else
+                return validateName(document.Form1.FName.value)
+        }
+
+        function validateName(name) { // use search function /* if (name.search(/^[a-zA-Z -]+$/) == -1) { alert("Name is not valid") return false } else return true */ // use test function // var patt = new RegExp("^[a-zA-Z -]+$") var patt = /^[a-zA-Z -]+$/ if (!patt.test(name)) { alert("Name is not valid!") return false } else return true }
+
+    </script>
+
+</body>
+
+</html>
